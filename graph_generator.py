@@ -45,7 +45,7 @@ class GraphGenerator:
 		intersection = list(set(intersection))
 		
 		# index those vertex
-		count = 1
+		count = 0
 		exist_node_reverse = {v:k for k,v in self.exist_node.items()}
 		for i in range(len(vertex)):
 			if vertex[i] not in self.exist_node.values():
@@ -85,17 +85,15 @@ class GraphGenerator:
 	
 	
 	def printGraph(self):
-		print('V = {')
-		for k,v in self.v_dict.items():
-			print('  {0}: ({1:.2f},{2:.2f})'.format(k,v[0],v[1]))
-		print("}")
+		print('V {0}'.format(max(self.v_dict.keys())))
 		t = []
 		for e in range(len(self.edges)):
 			if not e == len(self.edges)-1:
-				t.append('  <{0},{1}>,'.format(self.edges[e][0],self.edges[e][1]))
+				t.append('<{0},{1}>,'.format(self.edges[e][0],self.edges[e][1]))
 			else:
-				t.append('  <{0},{1}>'.format(self.edges[e][0],self.edges[e][1]))
-		print('E = {')
-		for e in t:
-			print(e)
-		print("}")
+				t.append('<{0},{1}>'.format(self.edges[e][0],self.edges[e][1]))
+		res = "E {"
+		for i in t:
+			res += i
+		res+="}"
+		print(res)
