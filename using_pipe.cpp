@@ -69,10 +69,10 @@ int main(void)
 	{
 		char* argv[6];
 		argv[0] = (char*)"a1ece650.cpp";
-		argv[1] = "a \"Weber Street\" (2,-1) (2,2) (5,5) (5,6) (3,8)";
-		argv[2] = "a \"King Street S\" (4,2) (4,8)";
-		argv[3] = "a \"Davenport Road\" (1,4) (5,8)";
-		argv[4] = 'g';
+		argv[1] = (char*)"a \"Weber Street\" (2,-1) (2,2) (5,5) (5,6) (3,8)";
+		argv[2] = (char*)"a \"King Street S\" (4,2) (4,8)";
+		argv[3] = (char*)"a \"Davenport Road\" (1,4) (5,8)";
+		argv[4] = (char*)'g';
 		argv[5] = nullptr;
 		// redirect stdout to the pipe
 		dup2(ABtoC[1], STDOUT_FILENO);
