@@ -67,18 +67,18 @@ int main(void)
 	child_pid = fork ();
 	if (child_pid == 0) // child process run proA
 	{
-		char* argv[6]
-		argv[0] = (char*)"a1ece650.cpp"
-		argv[1] = "a \"Weber Street\" (2,-1) (2,2) (5,5) (5,6) (3,8)"
-		argv[2] = "a \"King Street S\" (4,2) (4,8)"
-		argv[3] = "a \"Davenport Road\" (1,4) (5,8)"
-		argv[4] = 'g'
-		argv[5] = nullptr
+		char* argv[6];
+		argv[0] = (char*)"a1ece650.cpp";
+		argv[1] = "a \"Weber Street\" (2,-1) (2,2) (5,5) (5,6) (3,8)";
+		argv[2] = "a \"King Street S\" (4,2) (4,8)";
+		argv[3] = "a \"Davenport Road\" (1,4) (5,8)";
+		argv[4] = 'g';
+		argv[5] = nullptr;
 		// redirect stdout to the pipe
 		dup2(ABtoC[1], STDOUT_FILENO);
 		close(ABtoC[0]);
 		close(ABtoC[1]);	 // Close this too!
-		execv("a1ece650.cpp",argv)
+		execv("a1ece650.cpp",argv);
 		// start process A
 		return 1;
 	}
