@@ -7,7 +7,7 @@ project(a3-ece650)
 # enable c++11 support
 set (CMAKE_CXX_FLAGS "-std=c++11 -Wall ${CMAKE_CXX_FLAGS}")
 set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/run)
-
+add_definitions(-std=c++11)
 # create the main executable
 ## add additional .cpp files if needed
 add_executable(a2-ece650 a2-ece650.cpp )
