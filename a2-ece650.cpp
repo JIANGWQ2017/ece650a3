@@ -1,8 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <regex>
-
+//#include <regex>
 using namespace std;
 
 
@@ -28,7 +27,18 @@ public:
 		return size;
 	}
 };
+class EIterator {
+private:
+    std::string input;
+    int cursor = 0;
 
+public:
+    EIterator(std::string);
+    std::pair<int, int> getNext();
+    bool hasNext();
+
+
+};
 
 
 int main()
@@ -40,67 +50,50 @@ int main()
 		if (line.empty())
 			break;
 
-		regex vpattern("(\\s*V\\s+)(\\d+)\\s*");
-		regex epattern("\\s*E\\s+\\{((<\\d+,\\d+>,*)*)\\}");
-		regex spattern("\\s*s\\s+\\d+\\s+\\d+\\s*");
-		smatch vmatchResult;
-		smatch ematchResult;
-		smatch smatchResult;
-		if(regex_match(line, vmatchResult, vpattern))
+		if(line.find("V")==0)
 		{
 			vertnum = 0;
 			cout<<line<<endl;
 			string vnum;
-			vnum = vmatchResult[2];
+//			vnum = vmatchResult[2];
+			vnum = line.substr(2);
 			vertnum = stoi(vnum);
 		}
-		else if (regex_match(line, ematchResult, epattern))
+
+		else if(line.find("E")==0)
 		{	
 			edges.clear();
-			int value;
-			smatch result;
-			regex ppattern("\\d+");
-			string::const_iterator iterStart = line.begin();
-			string::const_iterator iterEnd = line.end();
-			string temp;
 			cout<<line<<endl;
-			while (regex_search(iterStart, iterEnd, result, ppattern))
+			int value;
+			string t1 = line.substr(2);
+			EIterator eiterator = EIterator(t1);
+			while (eiterator.hasNext())
 			{
-				temp = result[0];
-				value = stoi(temp);
-				if (value > vertnum-1)
-				{
-					cout << "Error: out of range\n";
-					break;
-				}
-				edges.push_back(value);
-				iterStart = result[0].second;
-			}	
-			
+				std::pair<int,int> e = eiterator.getNext();
+				edges.push_back(e.first);
+				edges.push_back(e.second);
+			}
+
 		}
-		else if (regex_match(line,smatchResult,spattern))
+		//else if (regex_match(line,smatchResult,spattern))
+		else if(line.find("s")==0)
 		{
 			bool flag = true;
 			vector <int>startend;
-			int v;
-			string::const_iterator iterStart = line.begin();
-			string::const_iterator iterEnd = line.end();
-			string temp;
-			smatch result;
-			regex ppattern("\\d+");
-			
-			while (regex_search(iterStart, iterEnd, result, ppattern))
+
+			string t1 = line.substr(2,1);
+			int v1 = stoi(t1);
+			string t2 = line.substr(4,1);
+			int v2 = stoi(t2);
+			if (v1 >(vertnum-1) or v2>(vertnum-1))
 			{
-				temp = result[0];
-				v = stoi(temp);
-				if (v> (vertnum - 1))
-				{
-					cout << "Error: Out of range\n";
-					flag = false;
-					break;
-				}
-				startend.push_back(v);
-				iterStart = result[0].second;
+				cout<<"Error: out of range\n";
+				flag = false;
+			}
+			else
+			{
+				startend.push_back(v1);
+				startend.push_back(v2);
 			}
 			if (flag == false)
 			{
@@ -237,3 +230,42 @@ void DistanceMatrix::showPath()
 	cout << '\n';
 }
 
+EIterator::EIterator(std::string input) {
+    if (input[0] == '{') {
+        this->cursor = 1;
+        this->input = input;
+    } else {
+        throw "Error: *Unexpected input.";
+    }
+
+}
+
+std::pair<int, int> EIterator::getNext() {
+    int first = 0, second = 0;
+    int *which = &first;
+    while(this->input[this->cursor]!='>'){
+        switch (this->input[cursor]) {
+            case '<':
+                which = &first;
+                break;
+            case ',':
+                which = &second;
+                break;
+            default:  // number
+                *which = (*which * 10) + (input[cursor] - '0');
+        }
+        cursor++;
+
+    }
+    cursor++;
+    if (this->input[cursor] == ',') {
+        cursor++;
+    }
+
+
+    return std::pair<int, int>{first, second};
+}
+
+bool EIterator::hasNext() {
+    return this->input[this->cursor] != '}';
+}
