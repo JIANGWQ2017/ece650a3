@@ -21,9 +21,9 @@ int A1(void) {
 
 int A2(void) {
 	char* argv[2];
-	argv[0] = (char*)"./a2";
+	argv[0] = (char*)"./a2-ece650";
 	argv[1] = nullptr;
-	execv("./a2",argv);
+	execv("./a2-ece650",argv);
 	std::cout << "Did not call a2-ece650.cpp"<<std::endl;
 	return 0;
 }
@@ -73,7 +73,7 @@ int main(int argc, char **argv)
 		}
 		argv1[argc] = NULL;
 		execv("./rgen",argv1);
-		std::cout << "Did not call a2-ece650.cpp"<<std::endl;
+		std::cout << "Did not call rgen"<<std::endl;
 		return 0;
 	}
 	
