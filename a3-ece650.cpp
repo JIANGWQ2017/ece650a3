@@ -11,7 +11,7 @@ using namespace std;
 /// Entry point of process A
 int A1(void) {
 	char* argv[3];
-	argv[1] = (char*)"./a1ece650.py";
+	argv[1] = (char*)"./a1-ece650.py";
 	argv[0]= (char*)"/usr/bin/python";
 	argv[2] = nullptr;
 	execv("/usr/bin/python",argv);
