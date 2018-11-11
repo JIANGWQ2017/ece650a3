@@ -10,7 +10,7 @@ string line;
 int vertnum = 0;
 vector<int> edges;
 const int inf = 999999;
-const int maxnum = 100;
+const int maxnum = 10000;
 
 class DistanceMatrix
 {
@@ -33,36 +33,37 @@ public:
 
 int main()
 {
-	while (true)
-	{
-		getline(cin, line);
+	while (!std::cin.eof()) {
+		// read a line of input until EOL and store in a string
+		std::string line;
+		std::getline(std::cin, line);
 		if (line.empty())
 			break;
+
 		regex vpattern("(\\s*V\\s+)(\\d+)\\s*");
-		regex epattern("\\s*E\\s+\\{((<\\d+,\\d+>,*)+)\\}");
+		regex epattern("\\s*E\\s+\\{((<\\d+,\\d+>,*)*)\\}");
 		regex spattern("\\s*s\\s+\\d+\\s+\\d+\\s*");
 		smatch vmatchResult;
 		smatch ematchResult;
 		smatch smatchResult;
 		if(regex_match(line, vmatchResult, vpattern))
 		{
+			vertnum = 0;
+			cout<<line<<endl;
 			string vnum;
 			vnum = vmatchResult[2];
 			vertnum = stoi(vnum);
 		}
 		else if (regex_match(line, ematchResult, epattern))
-		{
-			if (vertnum == 0)
-			{
-				cout << "Error: Please input number of vertex first\n";
-				continue;
-			}
+		{	
+			edges.clear();
 			int value;
 			smatch result;
 			regex ppattern("\\d+");
 			string::const_iterator iterStart = line.begin();
 			string::const_iterator iterEnd = line.end();
 			string temp;
+			cout<<line<<endl;
 			while (regex_search(iterStart, iterEnd, result, ppattern))
 			{
 				temp = result[0];
@@ -123,7 +124,7 @@ int main()
 		}
 		else
 		{
-			cout << "Error: Invalid input"<<'\n';
+			cout << "Error: Invalid input: "<<line<< endl;
 			continue;
 		}
 	}

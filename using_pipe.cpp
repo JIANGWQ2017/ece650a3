@@ -9,15 +9,12 @@
 
 /// Entry point of process A
 int procA(void) {
-	// Process A writing to C
-	for (int i = 0; i < 100; i++)
-	{
-		std::cout << "Hi" << std::endl;
-		usleep(5000);
-	}
-	std::cout << "[A] Sleeping" << std::endl;
-	sleep(6);
-	std::cout << "[A] Exiting" << std::endl;
+	char* argv[3];
+	argv[1] = (char*)"./a1ece650.py";
+	argv[0]= (char*)"/usr/bin/python";
+	argv[2] = nullptr;
+	execv("/usr/bin/python",argv);
+	std::cout << "Did not call python scripyt"<<std::endl;
 	return 0;
 }
 
@@ -60,26 +57,22 @@ int main(void)
 	std::vector<pid_t> kids;
 	// create a pipe
 	int ABtoC[2];
+	int RtoP[2];
+	pipe(RtoP);
 	pipe(ABtoC);
-
+	
 
 	pid_t child_pid;
 	child_pid = fork ();
 	if (child_pid == 0) // child process run proA
 	{
-		char* argv[6];
-		argv[0] = (char*)"a1ece650.cpp";
-		argv[1] = (char*)"a \"Weber Street\" (2,-1) (2,2) (5,5) (5,6) (3,8)";
-		argv[2] = (char*)"a \"King Street S\" (4,2) (4,8)";
-		argv[3] = (char*)"a \"Davenport Road\" (1,4) (5,8)";
-		argv[4] = (char*)'g';
-		argv[5] = nullptr;
 		// redirect stdout to the pipe
 		dup2(ABtoC[1], STDOUT_FILENO);
 		close(ABtoC[0]);
 		close(ABtoC[1]);	 // Close this too!
-		execv("a1ece650.cpp",argv);
-		// start process A
+
+	// start process A
+		procA();
 		return 1;
 	}
 	else if (child_pid < 0) // fork function doesnot work

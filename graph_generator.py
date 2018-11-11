@@ -1,5 +1,5 @@
 from line_intersect_discriminator import LineIntersectDiscriminator
-
+import sys
 
 class GraphGenerator:
 
@@ -58,7 +58,6 @@ class GraphGenerator:
 			
 		# fetch index according to coordinate
 		v_dict_reverse = {v:k for k,v in v_dict.items()}
-		
 		# if intersection on segment, modify edges
 		for e in candidate_edge:
 			for p in intersection:
@@ -81,11 +80,10 @@ class GraphGenerator:
 		edges = []
 		edges.extend(candidate_edge)
 		self.v_dict = v_dict
-		self.edges = edges	
+		self.edges = edges
 	
 	
 	def printGraph(self):
-		print('V {0}'.format(max(self.v_dict.keys())))
 		t = []
 		for e in range(len(self.edges)):
 			if not e == len(self.edges)-1:
@@ -96,4 +94,8 @@ class GraphGenerator:
 		for i in t:
 			res += i
 		res+="}"
-		print(res)
+		if self.v_dict:
+			sys.stdout.write('V '+str(max(self.v_dict.keys())+1)+'\n' + res+'\n')
+		else:
+			sys.stdout.write('V 0'+'\n' + res+'\n')
+		sys.stdout.flush()

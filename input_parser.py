@@ -28,9 +28,6 @@ class InputParser:
 					return None
 				points_pattern = r'\s*-?[ 0-9]+\s*,\s*-?[ 0-9]+\s*'
 				points = re.findall(points_pattern, self.line)
-				if len(points) <2:
-					print('Error: invalid input')
-					return None
 				st_points = []
 				for p in points:
 					nums = p.split(',')
@@ -48,7 +45,7 @@ class InputParser:
 			if self.st_dict == {}:
 				print('Error: No street, cannot generate graph')
 				return None
-			gg = GraphGenerator(self.st_dict,self.exist_node)
+			gg = GraphGenerator(self.st_dict,{})
 			gg.generateGraph()
 			gg.printGraph()
 			
@@ -96,7 +93,7 @@ class InputParser:
 					points_pattern = r'\s*-?[ 0-9]+\s*,\s*-?[ 0-9]+\s*'
 					points = re.findall(points_pattern, self.line)
 					if len(points) <2:
-						print('Error: invalid input')
+						print('Error: invalid input:', self.line)
 						return None
 					st_points = []
 					for p in points:
@@ -113,5 +110,5 @@ class InputParser:
 		elif self.line == '':
 			return None
 		else:
-			print('Error: wrong command')
+			print('Error: wrong command: ',self.line)
 			return None

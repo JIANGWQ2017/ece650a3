@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <iostream>
 
-using namespace std
+using namespace std;
 /// main() must be declared with arguments
 /// otherwise command line arguments are ignored
 int main (int argc, char **argv)
@@ -17,7 +17,7 @@ int main (int argc, char **argv)
 	opterr = 0;
 
 	// expected options are '-a', '-b', and '-c value'
-	while ((c = getopt (argc, argv, "abc:")) != -1)
+	while ((c = getopt (argc, argv,"abc:")) != -1)
 		switch (c)
 		{
 		case 'a':
