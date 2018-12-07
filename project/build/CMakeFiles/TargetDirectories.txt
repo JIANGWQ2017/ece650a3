@@ -1,0 +1,17 @@
+/media/sf_share/project/build/CMakeFiles/install/strip.dir
+/media/sf_share/project/build/CMakeFiles/edit_cache.dir
+/media/sf_share/project/build/CMakeFiles/prj-ece650.dir
+/media/sf_share/project/build/CMakeFiles/rebuild_cache.dir
+/media/sf_share/project/build/CMakeFiles/list_install_components.dir
+/media/sf_share/project/build/CMakeFiles/install/local.dir
+/media/sf_share/project/build/CMakeFiles/install.dir
+/media/sf_share/project/build/minisat/CMakeFiles/install.dir
+/media/sf_share/project/build/minisat/CMakeFiles/list_install_components.dir
+/media/sf_share/project/build/minisat/CMakeFiles/minisat-lib-shared.dir
+/media/sf_share/project/build/minisat/CMakeFiles/install/strip.dir
+/media/sf_share/project/build/minisat/CMakeFiles/minisat-lib-static.dir
+/media/sf_share/project/build/minisat/CMakeFiles/minisat_core.dir
+/media/sf_share/project/build/minisat/CMakeFiles/rebuild_cache.dir
+/media/sf_share/project/build/minisat/CMakeFiles/install/local.dir
+/media/sf_share/project/build/minisat/CMakeFiles/minisat_simp.dir
+/media/sf_share/project/build/minisat/CMakeFiles/edit_cache.dir
