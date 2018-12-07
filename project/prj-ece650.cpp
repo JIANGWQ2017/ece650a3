@@ -53,6 +53,7 @@ bool cmp(struct node a, struct node b)
 // entry of input parsing function
 void* input(void*)
 {
+
 	bool vflag =false;
 	bool eflag = false;
 	/////////// input part /////////
